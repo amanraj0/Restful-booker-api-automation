@@ -12,18 +12,21 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import service.AuthTokenService;
 import service.BookingService;
+import utils.Helper;
 
 import java.util.HashMap;
 
 
 public class UpdateBookingTest {
 
+    Helper helper;
+
     @BeforeClass
     public void healthCheck(){
         if(!HealthCheckTest.healthCheck()){
             throw new SkipException("Health check API is down!!");
         }
-
+        helper = new Helper();
     }
     BookingService bookingService = new BookingService();
     int bookingId;
@@ -36,16 +39,16 @@ public class UpdateBookingTest {
     public void createBookingWithValidDetails(){
 
         BookingDates bookingDate = new BookingDates.Builder()
-                .checkin("2024-01-01")
-                .checkout("2025-01-01")
+                .checkin(helper.get("checkin"))
+                .checkout(helper.get("checkout"))
                 .build();
 
         CreateBookingRequest validBookingDetails = new CreateBookingRequest.Builder()
-                .firstname("Aman")
-                .lastname("Raj")
-                .totalprice(223.09)
-                .depositpaid(true)
-                .additionalneeds("Warm Water")
+                .firstname(helper.get("firstname"))
+                .lastname(helper.get("lastname"))
+                .totalprice(Double.parseDouble(helper.get("totalprice")))
+                .depositpaid(Boolean.parseBoolean(helper.get("depositpaid").toLowerCase()))
+                .additionalneeds(helper.get("additionalneeds"))
                 .bookingdates(bookingDate)
                 .build();
 
@@ -63,16 +66,16 @@ public class UpdateBookingTest {
         pathParams.put("bookingId",bookingId);
 
         BookingDates bookingDate = new BookingDates.Builder()
-                .checkin("2024-01-01")
-                .checkout("2025-01-01")
+                .checkin(helper.get("checkin"))
+                .checkout(helper.get("checkout"))
                 .build();
 
         CreateBookingRequest validBookingDetails = new CreateBookingRequest.Builder()
-                .firstname("Aman")
-                .lastname("Raj")
-                .totalprice(223.09)
-                .depositpaid(true)
-                .additionalneeds("Warm Water")
+                .firstname(helper.get("firstname"))
+                .lastname(helper.get("lastname"))
+                .totalprice(Double.parseDouble(helper.get("totalprice")))
+                .depositpaid(Boolean.parseBoolean(helper.get("depositpaid").toLowerCase()))
+                .additionalneeds(helper.get("additionalneeds"))
                 .bookingdates(bookingDate)
                 .build();
 
@@ -108,16 +111,16 @@ public class UpdateBookingTest {
         pathParams.put("bookingId",bookingId);
 
         BookingDates bookingDate = new BookingDates.Builder()
-                .checkin("2025-05-01")
-                .checkout("2025-06-01")
+                .checkin(helper.get("updatedCheckin"))
+                .checkout(helper.get("updatedCheckout"))
                 .build();
 
         CreateBookingRequest validBookingDetails = new CreateBookingRequest.Builder()
-                .firstname("Aman")
-                .lastname("Raj")
-                .totalprice(2123.09)
-                .depositpaid(true)
-                .additionalneeds("Cold Water")
+                .firstname(helper.get("updatedFirstname"))
+                .lastname(helper.get("updatedLastname"))
+                .totalprice(Double.parseDouble(helper.get("updatedTotalprice")))
+                .depositpaid(Boolean.parseBoolean(helper.get("updatedDepositpaid").toLowerCase()))
+                .additionalneeds(helper.get("updatedAdditionalneeds"))
                 .bookingdates(bookingDate)
                 .build();
 

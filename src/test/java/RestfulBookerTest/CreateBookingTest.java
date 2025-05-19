@@ -9,15 +9,18 @@ import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import service.BookingService;
+import utils.Helper;
 
 public class CreateBookingTest {
 
+    Helper helper;
     @BeforeClass
     public void healthCheck(){
         if(!HealthCheckTest.healthCheck()){
             throw new SkipException("Health check API is down!!");
         }
 
+        helper = new Helper();
     }
 
     BookingService bookingService = new BookingService();
@@ -28,23 +31,22 @@ public class CreateBookingTest {
     public void createBookingWithValidDetails(){
 
         BookingDates bookingDate = new BookingDates.Builder()
-                .checkin("2024-01-01")
-                .checkout("2025-01-01")
+                .checkin(helper.get("checkin"))
+                .checkout(helper.get("checkout"))
                 .build();
 
         CreateBookingRequest validBookingDetails = new CreateBookingRequest.Builder()
-                .firstname("Aman")
-                .lastname("Raj")
-                .totalprice(223.09)
-                .depositpaid(true)
-                .additionalneeds("Warm Water")
+                .firstname(helper.get("firstname"))
+                .lastname(helper.get("lastname"))
+                .totalprice(Double.parseDouble(helper.get("totalprice")))
+                .depositpaid(Boolean.parseBoolean(helper.get("depositpaid").toLowerCase()))
+                .additionalneeds(helper.get("additionalneeds"))
                 .bookingdates(bookingDate)
                 .build();
 
         Response bookingResponse = bookingService.createBooking(validBookingDetails);
         Assert.assertEquals(bookingResponse.getStatusCode(),200,"Status code on successful creation should be 200");
         CreateBookingResponse bookedResponse = bookingResponse.as(CreateBookingResponse.class);
-        System.out.println(bookedResponse.bookingid());
     }
 
     @Test(
@@ -53,11 +55,11 @@ public class CreateBookingTest {
     )
     public void createBookingWithoutBookingDates(){
         CreateBookingRequest validBookingDetails = new CreateBookingRequest.Builder()
-                .firstname("Aman")
-                .lastname("Raj")
-                .totalprice(223.09)
-                .depositpaid(true)
-                .additionalneeds("Warm Water")
+                .firstname(helper.get("firstname"))
+                .lastname(helper.get("lastname"))
+                .totalprice(Double.parseDouble(helper.get("totalprice")))
+                .depositpaid(Boolean.parseBoolean(helper.get("depositpaid").toLowerCase()))
+                .additionalneeds(helper.get("additionalneeds"))
                 .build();
 
         Response bookingResponse = bookingService.createBooking(validBookingDetails);

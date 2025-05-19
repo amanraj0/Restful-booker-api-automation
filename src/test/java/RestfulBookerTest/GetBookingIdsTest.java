@@ -10,6 +10,7 @@ import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import service.BookingService;
+import utils.Helper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,12 +18,14 @@ import java.util.stream.Collectors;
 
 public class GetBookingIdsTest {
 
+    Helper helper;
+
     @BeforeClass
     public void healthCheck(){
         if(!HealthCheckTest.healthCheck()){
             throw new SkipException("Health check API is down!!");
         }
-
+        helper = new Helper();
     }
 
     int bookingId;
@@ -34,16 +37,16 @@ public class GetBookingIdsTest {
     public void createBookingWithValidDetails(){
 
         BookingDates bookingDate = new BookingDates.Builder()
-                .checkin("2024-01-01")
-                .checkout("2025-01-01")
+                .checkin(helper.get("checkin"))
+                .checkout(helper.get("checkout"))
                 .build();
 
         CreateBookingRequest validBookingDetails = new CreateBookingRequest.Builder()
-                .firstname("Aman")
-                .lastname("Raj")
-                .totalprice(223.09)
-                .depositpaid(true)
-                .additionalneeds("Warm Water")
+                .firstname(helper.get("firstname"))
+                .lastname(helper.get("lastname"))
+                .totalprice(Double.parseDouble(helper.get("totalprice")))
+                .depositpaid(Boolean.parseBoolean(helper.get("depositpaid").toLowerCase()))
+                .additionalneeds(helper.get("additionalneeds"))
                 .bookingdates(bookingDate)
                 .build();
 
@@ -77,7 +80,7 @@ public class GetBookingIdsTest {
     public void getBookingIdByFirstname(){
 
         HashMap<String,String> queryParam = new HashMap<>();
-        queryParam.put("firstname","Aman");
+        queryParam.put("firstname",helper.get("firstname"));
 
         Response bookingIdsResponse = bookingService.getBookingId(queryParam);
         Assert.assertEquals(bookingIdsResponse.getStatusCode(),200,"Status code should be 200");
@@ -98,7 +101,7 @@ public class GetBookingIdsTest {
     public void getBookingIdByLastname(){
 
         HashMap<String,String> queryParam = new HashMap<>();
-        queryParam.put("lastname","Raj");
+        queryParam.put("lastname",helper.get("lastname"));
 
         Response bookingIdsResponse = bookingService.getBookingId(queryParam);
         Assert.assertEquals(bookingIdsResponse.getStatusCode(),200,"Status code should be 200");
