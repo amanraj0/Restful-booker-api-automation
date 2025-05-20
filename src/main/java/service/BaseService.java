@@ -1,5 +1,7 @@
 package service;
 
+import filters.LoggingFilter;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -11,6 +13,10 @@ import static io.restassured.RestAssured.*;
 public class BaseService {
 
     private final RequestSpecification requestSpecification;
+
+    static {
+        RestAssured.filters(new LoggingFilter());
+    }
 
     public BaseService(){
         String baseUrl = "https://restful-booker.herokuapp.com";
