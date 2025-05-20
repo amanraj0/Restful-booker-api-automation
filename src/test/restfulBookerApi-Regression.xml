@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Surefire suite]" verbose="0">
+  <listeners>
+    <listener class-name="listeners.TestsListeners"></listener>
+  </listeners>
+  <test thread-count="5" name="Surefire test(failed)" verbose="0">
+    <classes>
+      <class name="RestfulBookerTest.UpdateBookingTest">
+        <methods>
+          <include name="updateBookingDetails"/>
+          <include name="createBookingWithValidDetails"/>
+          <include name="healthCheck"/>
+          <include name="createTokenWithValidUsernameAndPassword"/>
+          <include name="createBookingWithoutCookie"/>
+        </methods>
+      </class> <!-- RestfulBookerTest.UpdateBookingTest -->
+      <class name="RestfulBookerTest.CreateBookingTest">
+        <methods>
+          <include name="createBookingWithoutBookingDates"/>
+          <include name="healthCheck"/>
+          <include name="createBookingWithValidDetails"/>
+        </methods>
+      </class> <!-- RestfulBookerTest.CreateBookingTest -->
+      <class name="RestfulBookerTest.GetBookingIdsTest">
+        <methods>
+          <include name="getBookingId"/>
+          <include name="getBookingIdByLastname"/>
+          <include name="healthCheck"/>
+          <include name="getBookingIdByFirstname"/>
+          <include name="createBookingWithValidDetails"/>
+        </methods>
+      </class> <!-- RestfulBookerTest.GetBookingIdsTest -->
+      <class name="RestfulBookerTest.AuthTokenTest">
+        <methods>
+          <include name="healthCheck"/>
+          <include name="createTokenWithIncorrectUsernameAndPassword"/>
+          <include name="createTokenWithValidUsernameAndPassword"/>
+        </methods>
+      </class> <!-- RestfulBookerTest.AuthTokenTest -->
+    </classes>
+  </test> <!-- Surefire test(failed) -->
+</suite> <!-- Failed suite [Surefire suite] -->
