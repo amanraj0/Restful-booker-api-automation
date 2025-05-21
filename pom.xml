@@ -24,7 +24,7 @@
                     <systemPropertyVariables>
                         <baseUrl>${baseUrl}</baseUrl>
                         <logFilePath>${project.basedir}/log/RestfulbookerApiAutomationTest.log</logFilePath>
-                        <testDataFilePath>${project.basedir}/src/test/resources/restful-booker/</testDataFilePath>
+                        <testDataFilePath>${project.basedir}/src/test/resources/restful-booker</testDataFilePath>
                     </systemPropertyVariables>
                     <suiteXmlFiles>
                         <suiteXmlFile>
