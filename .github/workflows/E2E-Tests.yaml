@@ -1,0 +1,42 @@
+name: End to End API Automation
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to run tests on"
+        required: true
+        type: choice
+        default: dev
+        options:
+          - dev
+          - sit
+      suite:
+        description: "Suite to run"
+        required: true
+        type: choice
+        default: smoke
+        options:
+          - smoke
+          - regression
+
+jobs:
+  API-tests:
+    name: Run API E2E Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+      - name: Run API E2E Tests
+        run: mvn test -P${{inputs.environment}} -Dsuite=${{inputs.suite}}
+      - name: Upload Execution log
+        uses: actions/upload-artifact@v4
+        with:
+          name: log
+          path: log/
