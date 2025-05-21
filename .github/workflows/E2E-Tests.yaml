@@ -40,4 +40,3 @@ on:
           with:
             name: log
             path: log/
-            
