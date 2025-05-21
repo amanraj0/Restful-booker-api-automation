@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Surefire suite]" verbose="0">
+
+  <test thread-count="5" name="Surefire test(failed)" verbose="0">
+    <classes>
+      <class name="RestfulBookerTest.UpdateBookingTest">
+        <methods>
+          <include name="createBookingWithValidDetails"/>
+          <include name="createTokenWithValidUsernameAndPassword"/>
+          <include name="updateBookingDetails"/>
+        </methods>
+      </class> <!-- RestfulBookerTest.UpdateBookingTest -->
+      <class name="RestfulBookerTest.CreateBookingTest">
+        <methods>
+          <include name="createBookingWithValidDetails"/>
+        </methods>
+      </class> <!-- RestfulBookerTest.CreateBookingTest -->
+      <class name="RestfulBookerTest.GetBookingIdsTest">
+        <methods>
+          <include name="createBookingWithValidDetails"/>
+          <include name="getBookingId"/>
+        </methods>
+      </class> <!-- RestfulBookerTest.GetBookingIdsTest -->
+      <class name="RestfulBookerTest.AuthTokenTest">
+        <methods>
+          <include name="healthCheck"/>
+          <include name="createTokenWithValidUsernameAndPassword"/>
+        </methods>
+      </class> <!-- RestfulBookerTest.AuthTokenTest -->
+    </classes>
+  </test> <!-- Surefire test(failed) -->
+</suite> <!-- Failed suite [Surefire suite] -->

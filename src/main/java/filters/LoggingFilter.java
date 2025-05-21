@@ -12,7 +12,8 @@ import java.util.Optional;
 
 public class LoggingFilter implements Filter {
 
-    private static final Logger logger = LogManager.getLogger(LoggingFilter.class);
+    static String className = Thread.currentThread().getStackTrace()[2].getClassName();
+    private final Logger logger = LogManager.getLogger(className);
 
     public Response filter(FilterableRequestSpecification requestSpec, FilterableResponseSpecification responseSpec, FilterContext ctx){
         logRequest(requestSpec);
