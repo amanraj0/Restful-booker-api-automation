@@ -19,7 +19,7 @@ public class BaseService {
     }
 
     public BaseService(){
-        String baseUrl = "https://restful-booker.herokuapp.com";
+        String baseUrl = System.getProperty("baseUrl");
         requestSpecification =  given().baseUri(baseUrl);
     }
 

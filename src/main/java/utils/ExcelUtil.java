@@ -8,23 +8,17 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 public class ExcelUtil {
 
-    private final String filePath;
+    private final String filePath = System.getProperty("testDataFilePath");
     String timeStamp = String.valueOf(System.currentTimeMillis());
 
-    ExcelUtil(String folder){
-        filePath = "/";
-    }
-
     public String readExcel(int sheetIndex,String key){
-        try(XSSFWorkbook workbook = new XSSFWorkbook("test"+timeStamp+".xlsx")){
+        try(XSSFWorkbook workbook = new XSSFWorkbook(filePath+"test_"+timeStamp+".xlsx")){
             XSSFSheet sheet = workbook.getSheetAt(sheetIndex);
             int rowCount = sheet.getPhysicalNumberOfRows();
             for(int i=0;i<rowCount;i++){
@@ -39,9 +33,9 @@ public class ExcelUtil {
         return null;
     }
 
-    public void createExcel(String fileName){
+    public void createExcel(){
         Map<String,Object> generateData = new GenerateData().createTestData();
-        File testDataFile = new File(fileName+timeStamp+".xlsx");
+        File testDataFile = new File(filePath+"test_"+timeStamp+".xlsx");
 
         try(XSSFWorkbook workbook = new XSSFWorkbook()){
             XSSFSheet sheet = workbook.createSheet();

@@ -9,8 +9,8 @@ public class Helper {
     ExcelUtil excelUtil;
 
     public Helper(){
-        excelUtil = new ExcelUtil("fund");
-        excelUtil.createExcel("test");
+        excelUtil = new ExcelUtil();
+        excelUtil.createExcel();
     }
 
     public static JsonPath toJson(Response response){

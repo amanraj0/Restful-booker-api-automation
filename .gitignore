@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 log/
+src/test/resources/restful-booker/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

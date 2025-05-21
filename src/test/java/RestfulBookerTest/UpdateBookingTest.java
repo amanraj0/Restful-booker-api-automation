@@ -61,7 +61,7 @@ public class UpdateBookingTest {
             priority = 1,
             description = "Verify that user gets forbidden error if no token is provided while updating the booking"
     )
-    public void createBookingWithoutCookie(){
+    public void updateBookingWithoutCookie(){
         HashMap<String,Integer> pathParams = new HashMap<>();
         pathParams.put("bookingId",bookingId);
 
