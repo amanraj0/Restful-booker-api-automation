@@ -20,23 +20,23 @@ on:
           - smoke
           - regression
 
-  jobs:
-    API-tests:
-      name: Run API E2E Tests
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
-        - name: Setup JDK 21
-          uses: actions/setup-java@v4
-          with:
-            distribution: 'temurin'
-            java-version: '21'
-            cache: 'maven'
-        - name: Run API E2E Tests
-          run: mvn test -P${{inputs.environment}} -Dsuite=${{inputs.suite}}
-        - name: Upload Execution log
-          uses: actions/upload-artifact@v4
-          with:
-            name: log
-            path: log/
+jobs:
+  API-tests:
+    name: Run API E2E Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+      - name: Run API E2E Tests
+        run: mvn test -P${{inputs.environment}} -Dsuite=${{inputs.suite}}
+      - name: Upload Execution log
+        uses: actions/upload-artifact@v4
+        with:
+          name: log
+          path: log/
