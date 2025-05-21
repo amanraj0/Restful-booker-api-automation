@@ -18,7 +18,7 @@ public class ExcelUtil {
     String timeStamp = String.valueOf(System.currentTimeMillis());
 
     public String readExcel(int sheetIndex,String key){
-        try(XSSFWorkbook workbook = new XSSFWorkbook(filePath+"test_"+timeStamp+".xlsx")){
+        try(XSSFWorkbook workbook = new XSSFWorkbook(filePath+"/test_"+timeStamp+".xlsx")){
             XSSFSheet sheet = workbook.getSheetAt(sheetIndex);
             int rowCount = sheet.getPhysicalNumberOfRows();
             for(int i=0;i<rowCount;i++){
@@ -35,7 +35,19 @@ public class ExcelUtil {
 
     public void createExcel(){
         Map<String,Object> generateData = new GenerateData().createTestData();
-        File testDataFile = new File(filePath+"test_"+timeStamp+".xlsx");
+        File testDataFolder = new File(filePath);
+        if(!testDataFolder.exists()){
+            boolean created = testDataFolder.mkdir();
+            if(created){
+                System.out.println("Created folder: " + testDataFolder);
+            }else{
+                System.err.println("Failed to create folder: " + testDataFolder);
+            }
+        }else{
+            System.out.println("Folder already exists: " + testDataFolder);
+        }
+
+        File testDataFile = new File(testDataFolder+"/test_"+timeStamp+".xlsx");
 
         try(XSSFWorkbook workbook = new XSSFWorkbook()){
             XSSFSheet sheet = workbook.createSheet();
