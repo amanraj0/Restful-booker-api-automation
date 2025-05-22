@@ -25,6 +25,7 @@
                         <baseUrl>${baseUrl}</baseUrl>
                         <logFilePath>${project.basedir}/log/RestfulbookerApiAutomationTest.log</logFilePath>
                         <testDataFilePath>${project.basedir}/src/test/resources/restful-booker</testDataFilePath>
+                        <maxRetryCount>3</maxRetryCount>
                     </systemPropertyVariables>
                     <suiteXmlFiles>
                         <suiteXmlFile>
@@ -56,7 +57,6 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.11.0</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
