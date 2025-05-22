@@ -23,7 +23,7 @@ public class Helper {
     }
 
     public String readEnv(String key){
-        Dotenv dotenv = Dotenv.load();
+        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
         return dotenv.get(key,System.getenv(key));
     }
 
