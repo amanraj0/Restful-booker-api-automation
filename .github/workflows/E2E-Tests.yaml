@@ -3,7 +3,7 @@ name: End to End API Automation
 on:
   workflow_dispatch:
     inputs:
-      environment:
+      env:
         description: "Environment to run tests on"
         required: true
         type: choice
@@ -24,6 +24,9 @@ jobs:
   API-tests:
     name: Run API E2E Tests
     runs-on: ubuntu-latest
+
+    environment: ${{ github.event.inputs.env }}
+    
     env:
       USERID: ${{ secrets.USERID }}
       PASSWORD: ${{ secrets.PASSWORD }}
@@ -37,7 +40,7 @@ jobs:
           java-version: '21'
           cache: 'maven'
       - name: Run API E2E Tests
-        run: mvn test -P${{inputs.environment}} -Dsuite=${{inputs.suite}}
+        run: mvn test -P${{inputs.env}} -Dsuite=${{inputs.suite}}
       - name: Upload Execution log
         uses: actions/upload-artifact@v4
         with:
