@@ -1,6 +1,7 @@
 package utils;
 
 import groovyjarjarpicocli.CommandLine;
+import io.github.cdimascio.dotenv.Dotenv;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
@@ -19,6 +20,11 @@ public class Helper {
 
     public String get(String key){
         return excelUtil.readExcel(0,key);
+    }
+
+    public String readEnv(String key){
+        Dotenv dotenv = Dotenv.load();
+        return dotenv.get(key,System.getenv(key));
     }
 
 }

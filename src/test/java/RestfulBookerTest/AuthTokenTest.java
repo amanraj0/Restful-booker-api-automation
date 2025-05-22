@@ -12,6 +12,7 @@ import utils.Helper;
 
 public class AuthTokenTest {
 
+    Helper helper = new Helper();
     @BeforeClass
     public void healthCheck(){
         if(!HealthCheckTest.healthCheck()){
@@ -26,7 +27,7 @@ public class AuthTokenTest {
             description = "Verify that on providing valid username and password user gets a token"
     )
     public void createTokenWithValidUsernameAndPassword(){
-        AuthTokenRequest validCredentialsPayload = new AuthTokenRequest("admin","password123");
+        AuthTokenRequest validCredentialsPayload = new AuthTokenRequest(helper.readEnv("USERID"), helper.readEnv("PASSWORD"));
         Response authTokenServiceResponse = authTokenService.generateToken(validCredentialsPayload);
         Assert.assertEquals(authTokenServiceResponse.getStatusCode(),200,"Success status code should be 200");
         AuthTokenResponse authTokenResponse = authTokenServiceResponse.as(AuthTokenResponse.class);

@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 log/
 src/test/resources/restful-booker/
+.env
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

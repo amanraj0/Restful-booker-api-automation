@@ -90,7 +90,7 @@ public class UpdateBookingTest {
     )
     public void createTokenWithValidUsernameAndPassword(){
         AuthTokenService authTokenService = new AuthTokenService();
-        AuthTokenRequest validCredentialsPayload = new AuthTokenRequest("admin","password123");
+        AuthTokenRequest validCredentialsPayload = new AuthTokenRequest(helper.readEnv("USERID"), helper.readEnv("PASSWORD"));
         Response authTokenServiceResponse = authTokenService.generateToken(validCredentialsPayload);
         Assert.assertEquals(authTokenServiceResponse.getStatusCode(),200,"Success status code should be 200");
         AuthTokenResponse authTokenResponse = authTokenServiceResponse.as(AuthTokenResponse.class);
