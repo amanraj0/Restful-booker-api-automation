@@ -24,6 +24,9 @@ jobs:
   API-tests:
     name: Run API E2E Tests
     runs-on: ubuntu-latest
+    env:
+      USERID: ${{secrets.USERID}}
+      PASSWORD: ${{secrets.PASSWORD}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
